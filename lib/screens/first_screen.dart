@@ -5,7 +5,7 @@ import 'package:gymtodo/exercise_provider.dart';
 class FirstScreen extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
 
-  FirstScreen({super.key});
+ FirstScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -122,32 +122,31 @@ class FirstScreen extends StatelessWidget {
                           },
                         ),
                 ),
-                const SizedBox(height: 15),
-                
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 400, vertical: 16),
-                      backgroundColor: const Color(0xFF77C7FF),
-                      foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      elevation: 2,
-                    ),
-                    child: const Text(
-                      'Back to Home',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
               ],
             ),
           );
         },
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF77C7FF),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+            foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+            elevation: 2,
+          ),
+          child: const Text(
+            'Back to Home',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
       ),
     );
   }

@@ -4,28 +4,36 @@ class Exercise {
   String name;
   bool isCompleted;
 
-  Exercise(this.name, {this.isCompleted = false});
+  Exercise({required this.name, this.isCompleted = false});
 }
 
-final exerciseListProvider =
-    StateNotifierProvider<ExerciseListNotifier, List<Exercise>>(
-  (ref) => ExerciseListNotifier(),
-);
-
-class ExerciseListNotifier extends StateNotifier<List<Exercise>> {
-  ExerciseListNotifier() : super([]);
+class ExerciseNotifier extends StateNotifier<List<Exercise>> {
+  ExerciseNotifier() : super([]);
 
   void addExercise(String name) {
-    state = [...state, Exercise(name)];
+    state = [...state, Exercise(name: name)];
   }
 
   void toggleExerciseCompletion(int index) {
+    final updatedExercise = Exercise(
+      name: state[index].name,
+      isCompleted: !state[index].isCompleted,
+    );
+
+    // Create a new list with the updated exercise
     state = [
-      for (int i = 0; i < state.length; i++)
-        if (i == index)
-          Exercise(state[i].name, isCompleted: !state[i].isCompleted)
-        else
-          state[i]
+      ...state.sublist(0, index),
+      updatedExercise,
+      ...state.sublist(index + 1),
     ];
   }
+
+  void deleteExercise(int index) {
+    state = [...state]..removeAt(index);
+  }
 }
+
+final exerciseListProvider =
+    StateNotifierProvider<ExerciseNotifier, List<Exercise>>(
+  (ref) => ExerciseNotifier(),
+);
